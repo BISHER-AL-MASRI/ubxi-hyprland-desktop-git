@@ -1,0 +1,51 @@
+* {
+  font-family: "Fira Code Nerd Font Mono";
+  font-size: 12px;
+}
+
+#window {
+  background-color: #13093c;
+  color: #ffffff;
+  border: 2px solid #26184c;
+  border-radius: 0px;
+}
+
+#outer-box {
+  padding: 20px;
+}
+
+#input {
+  background-color: #26184c;
+  border: 0px solid #8d7be4;
+  padding: 8px 12px;
+}
+
+#scroll {
+  margin-top: 20px;
+}
+
+#img {
+  padding-right: 8px;
+}
+
+#text {
+  color: #ffffff;
+}
+
+#text:selected {
+  color: #13093c;
+}
+
+#entry {
+  padding: 6px;
+}
+
+#entry:selected {
+  background-color: #8d7be4;
+  color: #13093c;
+}
+
+#input,
+#entry:selected {
+  border-radius: 4px;
+}
