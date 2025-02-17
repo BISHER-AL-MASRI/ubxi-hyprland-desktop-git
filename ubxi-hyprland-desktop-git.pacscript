@@ -10,11 +10,11 @@ source=(
 )
 sha256sums=("SKIP")
 
-depends=("hyprland" "waybar" "alacritty" "wofi" "thunar" "wl-clipboard" "dunst" "xdg-desktop-portal-hyprland" "grim" "slurp")
+depends=("hyprland" "waybar" "alacritty" "wofi" "thunar" "wl-clipboard" "dunst" "xdg-desktop-portal-hyprland" "grim" "slurp" "adw-gtk-theme")
 makedepends=("git" "unzip")
 optdepends=(
   "swaylock: for locking the screen"
-  "swayidle: for power management"
+  "wlogout: for loging out"
 )
 pacdeps=("rhino-ubxi-core")
 replaces=("unicorn-desktop")
