@@ -35,25 +35,17 @@ package() {
   cd "${srcdir}/ubxi-hyprland-desktop-git"
   
   # Ensure directories exist
-  install -d "${pkgdir}/etc/skel/.config/hypr"
-  install -d "${pkgdir}/etc/skel/.config/waybar"
-  install -d "${pkgdir}/etc/skel/.config/alacritty"
-  install -d "${pkgdir}/etc/skel/.config/wofi"
-  install -d "${pkgdir}/usr/share/wallpapers/rhino"
+  mkdir -p "${pkgdir}/etc/skel/.config"
+  mkdir -p "${pkgdir}/usr/share/wallpapers/rhino"
 
-  # Install configuration files
-  install -Dm644 config/hypr/hyprland.conf "${pkgdir}/etc/skel/.config/hypr/hyprland.conf"
-  install -Dm644 config/hypr/hyprpaper.conf "${pkgdir}/etc/skel/.config/hypr/hyprpaper.conf"
-  install -Dm644 config/waybar/config "${pkgdir}/etc/skel/.config/waybar/config"
-  install -Dm644 config/waybar/style.css "${pkgdir}/etc/skel/.config/waybar/style.css"
-  install -Dm644 config/alacritty/alacritty.toml "${pkgdir}/etc/skel/.config/alacritty/alacritty.toml"
-  install -Dm644 config/alacritty/unicorn.toml "${pkgdir}/etc/skel/.config/alacritty/unicorn.toml"
-  install -Dm644 config/wofi/config "${pkgdir}/etc/skel/.config/wofi/config"
-  install -Dm644 config/wofi/style.css "${pkgdir}/etc/skel/.config/wofi/style.css"
+  # Copy all configuration files
+  cp -r config/hypr "${pkgdir}/etc/skel/.config/"
+  cp -r config/waybar "${pkgdir}/etc/skel/.config/"
+  cp -r config/alacritty "${pkgdir}/etc/skel/.config/"
+  cp -r config/wofi "${pkgdir}/etc/skel/.config/"
 
-  # Install wallpapers
-  install -Dm644 config/hypr/rhino/1.png "${pkgdir}/usr/share/wallpapers/rhino/1.png"
-  install -Dm644 config/hypr/rhino/2.png "${pkgdir}/usr/share/wallpapers/rhino/2.png"
+  # Copy wallpapers
+  cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
 }
 
 post_install() {
