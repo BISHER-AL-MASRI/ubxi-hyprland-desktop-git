@@ -24,7 +24,7 @@ pkgdesc="UBXI Hyprland Desktop Environment"
 external_connection=true
 incompatible=('debian:*')
 maintainer=("Bisher Al Masri <bisherk.almasri@gmail.com>")
-gives="ubxi-hyprland-desktop"
+gives="ubxi-hyprland-desktop-git"
 
 build() {
   cd "${gives}"
@@ -46,10 +46,3 @@ package() {
   cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
 }
 
-post_install() {
-  echo "UBXI Hyprland Desktop has been installed."
-}
-
-post_remove() {
-  echo "UBXI Hyprland Desktop has been removed."
-}
