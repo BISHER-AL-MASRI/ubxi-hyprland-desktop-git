@@ -1,4 +1,3 @@
-
 pkgname="ubxi-hyprland-desktop-git"
 arch=('amd64' 'arm64')
 pkgver="1.0.0"
@@ -28,15 +27,14 @@ maintainer=("Bisher Al Masri <bisherk.almasri@gmail.com>")
 gives="ubxi-hyprland-desktop"
 
 build() {
-  cd "${srcdir}/ubxi-hyprland-desktop-git"
+  cd "${gives}"
+  mkdir -p "${pkgdir}/usr/share/wallpapers/rhino/"
+  mkdir -p "${pkgdir}/etc/skel/.config/"
+
 }
 
 package() {
-  cd "${srcdir}/ubxi-hyprland-desktop-git"
-  
-  # Ensure directories exist
-  mkdir -p "${pkgdir}/etc/skel/.config"
-  mkdir -p "${pkgdir}/usr/share/wallpapers/rhino"
+  cd "${gives}"
 
   # Copy all configuration files
   cp -r config/hypr "${pkgdir}/etc/skel/.config/"
