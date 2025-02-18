@@ -8,16 +8,16 @@ source=("git+https://github.com/BISHER-AL-MASRI/ubxi-hyprland-desktop-git.git")
 sha256sums=("SKIP")
 
 depends=(
-  "hyprland" "waybar" "alacritty" "wofi" "thunar"
+  "waybar" "alacritty" "wofi" "thunar"
   "wl-clipboard" "dunst" "xdg-desktop-portal-hyprland"
-  "grim" "slurp" "adw-gtk-theme"
+  "grim" "slurp" "adw-gtk3"
 )
 makedepends=("git" "unzip")
 optdepends=(
   "swaylock: for locking the screen"
   "wlogout: for logging out"
 )
-pacdeps=("rhino-ubxi-core")
+pacdeps=("rhino-ubxi-core" "hyprland")
 replaces=("unicorn-desktop")
 priority='required'
 pkgdesc="UBXI Hyprland Desktop Environment"
@@ -30,6 +30,7 @@ build() {
   cd "${gives}"
   mkdir -p "${pkgdir}/usr/share/wallpapers/rhino/"
   mkdir -p "${pkgdir}/etc/skel/.config/"
+  mkdir -p "${pkgdir}/etc/xdg/"
 
 }
 
@@ -37,12 +38,20 @@ package() {
   cd "${gives}"
 
   # Copy all configuration files
-  cp -r config/hypr "${pkgdir}/etc/skel/.config/"
-  cp -r config/waybar "${pkgdir}/etc/skel/.config/"
+  cp -r config/hypr "${pkgdir}/etc/xdg"
+  cp -r config/waybar "${pkgdir}/etc/xdg"
   cp -r config/alacritty "${pkgdir}/etc/skel/.config/"
   cp -r config/wofi "${pkgdir}/etc/skel/.config/"
 
+  # also copy to user that installed
+  cp -r config/alacritty "${pkgdir}/$XDG_CONFIG_HOME/"
+  cp -r config/wofi "${pkgdir}/$XDG_CONFIG_HOME/"
+
   # Copy wallpapers
   cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
+}
+
+post_install() {
+  fancy_message info "IMPORTTANT: Finished Installation, make sure to copy alacritty and wofi to other users if you want from /etc/skel/alacritty or wofi. It is already installed in this current user as well.
 }
 
