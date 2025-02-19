@@ -40,15 +40,14 @@ build() {
 
 package() {
   cd "${gives}"
-
   # Copy all configuration files
-  cp -r config/hypr "${pkgdir}/etc/xdg"
-  cp -r config/waybar "${pkgdir}/etc/xdg"
-  cp -r config/alacritty "${pkgdir}/etc/skel/.config/"
-  cp -r config/wofi "${pkgdir}/etc/skel/.config/"
+  install -Dm644 config/hypr/* -t "${pkgdir}/etc/xdg/hypr/"
+  install -Dm644 config/waybar/* -t "${pkgdir}/etc/xdg/waybar/"
+  install -Dm644 config/alacritty/* -t "${pkgdir}/etc/skel/.config/alacritty/"
+  install -Dm644 config/wofi/* -t "${pkgdir}/etc/skel/.config/wofi/"
 
   # Copy wallpapers
-  cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
+  install -Dm644 config/hypr/rhino/* -t "${pkgdir}/usr/share/wallpapers/rhino/"
 }
 
 post_install() {
