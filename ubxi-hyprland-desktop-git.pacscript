@@ -30,12 +30,18 @@ prepare() {
   cd "${gives}"
   fancy_message info "test"
 }
-build() {
-  cd "${gives}"
-  mkdir -p "${pkgdir}/usr/share/wallpapers/rhino/"
-  mkdir -p "${pkgdir}/etc/skel/.config/"
-  mkdir -p "${pkgdir}/etc/xdg/"
 
+package() {
+  cd "${gives}"
+
+  # Copy all configuration files
+  cp -r config/hypr "${pkgdir}/etc/xdg"
+  cp -r config/waybar "${pkgdir}/etc/xdg"
+  cp -r config/alacritty "${pkgdir}/etc/skel/.config/"
+  cp -r config/wofi "${pkgdir}/etc/skel/.config/"
+
+  # Copy wallpapers
+  cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
 }
 
 package() {
