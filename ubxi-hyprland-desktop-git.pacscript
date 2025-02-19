@@ -51,6 +51,6 @@ package() {
 }
 
 post_install() {
-  fancy_message info "IMPORTTANT: Finished Installation, make sure to copy alacritty and wofi to other users if you want from /etc/skel/alacritty or wofi. It is already installed in this current user as well."
+  fancy_message info "IMPORTTANT: Finished Installation, make sure to copy alacritty and wofi to other users if you want from /etc/skel/alacritty or wofi. \n Run cp -r /etc/skel/{alacritty,wofi} ~/.config/"
 }
 
