@@ -21,6 +21,11 @@ pkgdesc="UBXI Hyprland Desktop Environment"
 incompatible=('debian:*')
 maintainer=("Bisher Al Masri <bisherk.almasri@gmail.com>")
 
+pre_install() {
+  echo "Preventing Waybar from installing /etc/xdg/waybar..."
+  dpkg-divert --add --rename --divert /etc/xdg/waybar.bak /etc/xdg/waybar
+}
+
 build() {
   mkdir -p "${pkgdir}/etc/xdg"
   mkdir -p "${pkgdir}/etc/skel/.config"
@@ -29,12 +34,21 @@ build() {
 
 package() {
   cd "${gives}"
-  # Copy all configuration files
-  cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
+
+  if ! [ -f /etc/xdg/waybar.bak ]; then
+    cp -r config/waybar "${pkgdir}/etc/xdg"
+  fi
+
   cp -r config/hypr "${pkgdir}/etc/xdg"
-  mv /etc/xdg/waybar/ /etc/xdg/waybar-old
-  cp -r config/waybar "${pkgdir}/etc/xdg"
-  cp -r config/alacritty "${pkgdir}/etc/skel/.config/"
+  cp -r config/alacritty "${pkgdir}/etc/xdg"
   cp -r config/wofi "${pkgdir}/etc/skel/.config/"
+
   # Copy wallpapers
+  cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
 }
+
+post_remove() {
+  echo "Restoring Waybar installation..."
+  dpkg-divert --rename --remove /etc/xdg/waybar
+}
+
