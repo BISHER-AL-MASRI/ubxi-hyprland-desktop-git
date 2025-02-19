@@ -1,5 +1,5 @@
 pkgname="ubxi-hyprland-desktop-git"
-gives="${pkgname}%-git"
+gives="${pkgname%-git}"
 arch=('amd64' 'arm64')
 pkgver="0.0.1"
 url='https://github.com/BISHER-AL-MASRI/ubxi-hyprland-desktop-git'
