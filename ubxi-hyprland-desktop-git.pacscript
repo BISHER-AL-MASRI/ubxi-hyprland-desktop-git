@@ -17,7 +17,7 @@ optdepends=(
   "swaylock: for locking the screen"
   "wlogout: for logging out"
 )
-pacdeps=("rhino-ubxi-core" "hyprland")
+pacdeps=("rhino-ubxi-core" "hyprland-bin")
 replaces=("unicorn-desktop")
 priority='required'
 pkgdesc="UBXI Hyprland Desktop Environment"
@@ -44,14 +44,14 @@ package() {
   cp -r config/wofi "${pkgdir}/etc/skel/.config/"
 
   # also copy to user that installed
-  cp -r config/alacritty "${pkgdir}/$XDG_CONFIG_HOME/"
-  cp -r config/wofi "${pkgdir}/$XDG_CONFIG_HOME/"
+  cp -r config/alacritty "${pkgdir}/$HOME/.config/"
+  cp -r config/wofi "${pkgdir}/$HOME/.config/"
 
   # Copy wallpapers
   cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
 }
 
 post_install() {
-  fancy_message info "IMPORTTANT: Finished Installation, make sure to copy alacritty and wofi to other users if you want from /etc/skel/alacritty or wofi. It is already installed in this current user as well.
+  fancy_message info "IMPORTTANT: Finished Installation, make sure to copy alacritty and wofi to other users if you want from /etc/skel/alacritty or wofi. It is already installed in this current user as well."
 }
 
