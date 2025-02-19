@@ -42,18 +42,6 @@ package() {
   # Copy wallpapers
 }
 
-package() {
-  cd "${gives}"
-  # Copy all configuration files
-  install -Dm644 config/hypr/* -t "${pkgdir}/etc/xdg/hypr/"
-  install -Dm644 config/waybar/* -t "${pkgdir}/etc/xdg/waybar/"
-  install -Dm644 config/alacritty/* -t "${pkgdir}/etc/skel/.config/alacritty/"
-  install -Dm644 config/wofi/* -t "${pkgdir}/etc/skel/.config/wofi/"
-
-  # Copy wallpapers
-  install -Dm644 config/hypr/rhino/* -t "${pkgdir}/usr/share/wallpapers/rhino/"
-}
-
 post_install() {
   fancy_message info "IMPORTTANT: Finished Installation, make sure to copy alacritty and wofi to other users if you want from /etc/skel/alacritty or wofi. \n Run cp -r /etc/skel/{alacritty,wofi} ~/.config/"
 }
