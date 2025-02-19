@@ -34,6 +34,7 @@ prepare() {
 package() {
   cd "${gives}"
 
+  cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
   # Copy all configuration files
   cp -r config/hypr "${pkgdir}/etc/xdg"
   cp -r config/waybar "${pkgdir}/etc/xdg"
@@ -41,7 +42,6 @@ package() {
   cp -r config/wofi "${pkgdir}/etc/skel/.config/"
 
   # Copy wallpapers
-  cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
 }
 
 package() {
