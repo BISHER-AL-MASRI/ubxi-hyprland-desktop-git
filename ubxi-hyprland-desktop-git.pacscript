@@ -29,10 +29,10 @@ gives="ubxi-hyprland-desktop-git"
 build() {
   mkdir -p "${pkgdir}/etc/xdg"
   mkdir -p "${pkgdir}/etc/skel/.config"
+  mkdir -p "${pkgdir}/usr/share/wallpapers/rhino/"
 }
 
 package() {
-  cd "${gives}"
   # Copy all configuration files
   cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
   cp -r config/hypr "${pkgdir}/etc/xdg"
