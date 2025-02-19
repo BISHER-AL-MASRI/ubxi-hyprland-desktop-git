@@ -26,21 +26,19 @@ incompatible=('debian:*')
 maintainer=("Bisher Al Masri <bisherk.almasri@gmail.com>")
 gives="ubxi-hyprland-desktop-git"
 
-prepare() {
-  cd "${gives}"
-  fancy_message info "test"
+build() {
+  mkdir -p "${pkgdir}/etc/xdg"
+  mkdir -p "${pkgdir}/etc/skel/.config"
 }
 
 package() {
   cd "${gives}"
-
-  cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
   # Copy all configuration files
+  cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
   cp -r config/hypr "${pkgdir}/etc/xdg"
   cp -r config/waybar "${pkgdir}/etc/xdg"
   cp -r config/alacritty "${pkgdir}/etc/skel/.config/"
   cp -r config/wofi "${pkgdir}/etc/skel/.config/"
-
   # Copy wallpapers
 }
 
