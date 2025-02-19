@@ -32,6 +32,8 @@ package() {
   # Copy all configuration files
   cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
   cp -r config/hypr "${pkgdir}/etc/xdg"
+  cp -r /etc/xdg/waybar/ /etc/xdg/waybar-old
+  rm -f /etc/xdg/waybar/* # because waybar comes with a pre made config
   cp -r config/waybar "${pkgdir}/etc/xdg"
   cp -r config/alacritty "${pkgdir}/etc/skel/.config/"
   cp -r config/wofi "${pkgdir}/etc/skel/.config/"
