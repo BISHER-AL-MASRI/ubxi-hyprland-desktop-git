@@ -26,6 +26,9 @@ incompatible=('debian:*')
 maintainer=("Bisher Al Masri <bisherk.almasri@gmail.com>")
 gives="ubxi-hyprland-desktop-git"
 
+prepare() {
+  cd ${gives}
+}
 build() {
   cd "${gives}"
   mkdir -p "${pkgdir}/usr/share/wallpapers/rhino/"
