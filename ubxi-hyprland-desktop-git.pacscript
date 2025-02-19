@@ -46,10 +46,6 @@ package() {
   cp -r config/alacritty "${pkgdir}/etc/skel/.config/"
   cp -r config/wofi "${pkgdir}/etc/skel/.config/"
 
-  # also copy to user that installed
-  cp -r config/alacritty "${pkgdir}/$HOME/.config/"
-  cp -r config/wofi "${pkgdir}/$HOME/.config/"
-
   # Copy wallpapers
   cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
 }
