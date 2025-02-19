@@ -33,6 +33,7 @@ build() {
 }
 
 package() {
+  cd "${gives}"
   # Copy all configuration files
   cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
   cp -r config/hypr "${pkgdir}/etc/xdg"
