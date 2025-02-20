@@ -24,12 +24,8 @@ maintainer=("Bisher Al Masri <bisherk.almasri@gmail.com>")
 pre_install() {
   echo "Preventing Waybar from installing configuration files in /etc/xdg/waybar..."
   
-  if [ -d /etc/xdg/waybar ]; then
-    for file in /etc/xdg/waybar/*; do
-      [ -e "$file" ] || continue
-      dpkg-divert --add --rename --divert "${file}.bak" "$file"
-    done
-  fi
+  sudo dpkg-divert --quiet --package "${pkgname}" --divert /etc/xdg/waybar/style.css.bak --rename /etc/xdg/waybar/style.css
+  sudo dpkg-divert --quiet --package "${pkgname}" --divert /etc/xdg/waybar/config.jsonc.bak --rename /etc/xdg/waybar/config.jsonc
 }
 
 build() {
@@ -41,9 +37,7 @@ build() {
 package() {
   cd "${gives}"
 
-  if ! [ -f /etc/xdg/waybar.bak ]; then
-    cp -r config/waybar "${pkgdir}/etc/xdg"
-  fi
+  cp -r config/waybar/* "${pkgdir}/etc/xdg/waybar/"
 
   cp -r config/hypr "${pkgdir}/etc/xdg"
   cp -r config/alacritty "${pkgdir}/etc/xdg"
@@ -56,11 +50,6 @@ package() {
 post_remove() {
   echo "Restoring Waybar configuration files..."
   
-  if [ -d /etc/xdg/waybar ]; then
-    for file in /etc/xdg/waybar/*.bak; do
-      original="${file%.bak}"
-      [ -e "$file" ] || continue
-      dpkg-divert --rename --remove "$original"
-    done
-  fi
+  sudo dpkg-divert --quiet --package "${pkgname}" --remove --rename /etc/xdg/waybar/config.jsonc
+  sudo dpkg-divert --quiet --package "${pkgname}" --remove --rename /etc/xdg/waybar/style.css
 }
