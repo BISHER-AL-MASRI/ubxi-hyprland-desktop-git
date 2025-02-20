@@ -26,8 +26,6 @@ pre_install() {
   sudo dpkg-divert --quiet --package "${pkgname}" --divert /etc/xdg/waybar/style.css.bak --rename /etc/xdg/waybar/style.css
   sudo dpkg-divert --quiet --package "${pkgname}" --divert /etc/xdg/waybar/config.jsonc.bak --rename /etc/xdg/waybar/config.jsonc
 
-  echo "Installing waybar from APT"
-  sudo apt install hyprland
 }
 
 build() {
@@ -49,6 +47,10 @@ package() {
   cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
 }
 
+post_install() {
+  echo "Installing waybar from APT"
+  sudo apt install hyprland
+}
 post_remove() {
   echo "Restoring Waybar configuration files..."
   
