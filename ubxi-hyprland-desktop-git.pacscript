@@ -26,6 +26,7 @@ pre_install() {
   sudo dpkg-divert --quiet --package "${pkgname}" --divert /etc/xdg/waybar/style.css.bak --rename /etc/xdg/waybar/style.css
   sudo dpkg-divert --quiet --package "${pkgname}" --divert /etc/xdg/waybar/config.jsonc.bak --rename /etc/xdg/waybar/config.jsonc
 
+  mkdir -p "${pkgdir}/etc/xdg/waybar/"
 }
 
 build() {
@@ -37,7 +38,6 @@ build() {
 package() {
   cd "${gives}"
 
-  mkdir -p "${pkgdir}/etc/xdg/waybar/"
   cp -r config/waybar/* "${pkgdir}/etc/xdg/waybar/"
 
   cp -r config/hypr "${pkgdir}/etc/xdg"
