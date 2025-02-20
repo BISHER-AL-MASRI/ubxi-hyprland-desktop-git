@@ -5,7 +5,7 @@ pkgver="0.0.1"
 url='https://github.com/BISHER-AL-MASRI/ubxi-hyprland-desktop-git'
 source=("${gives}::${url}.git")
 depends=(
-  "waybar" "alacritty" "wofi" "thunar"
+  "hyprland" "waybar" "alacritty" "wofi" "thunar"
   "wl-clipboard" "dunst" "xdg-desktop-portal-hyprland"
   "grim" "slurp"
 )
@@ -47,10 +47,6 @@ package() {
   cp -r config/hypr/rhino "${pkgdir}/usr/share/wallpapers/"
 }
 
-post_install() {
-  echo "Installing waybar from APT"
-  sudo apt install hyprland
-}
 post_remove() {
   echo "Restoring Waybar configuration files..."
   
