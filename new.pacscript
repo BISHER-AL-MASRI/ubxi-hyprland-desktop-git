@@ -22,8 +22,14 @@ incompatible=('debian:*')
 maintainer=("Bisher Al Masri <bisherk.almasri@gmail.com>")
 
 pre_install() {
-  echo "Preventing Waybar from installing /etc/xdg/waybar..."
-  dpkg-divert --add --rename --divert /etc/xdg/waybar.bak /etc/xdg/waybar
+  echo "Preventing Waybar from installing configuration files in /etc/xdg/waybar..."
+  
+  if [ -d /etc/xdg/waybar ]; then
+    for file in /etc/xdg/waybar/*; do
+      [ -e "$file" ] || continue
+      dpkg-divert --add --rename --divert "${file}.bak" "$file"
+    done
+  fi
 }
 
 build() {
@@ -48,7 +54,13 @@ package() {
 }
 
 post_remove() {
-  echo "Restoring Waybar installation..."
-  dpkg-divert --rename --remove /etc/xdg/waybar
+  echo "Restoring Waybar configuration files..."
+  
+  if [ -d /etc/xdg/waybar ]; then
+    for file in /etc/xdg/waybar/*.bak; do
+      original="${file%.bak}"
+      [ -e "$file" ] || continue
+      dpkg-divert --rename --remove "$original"
+    done
+  fi
 }
-
